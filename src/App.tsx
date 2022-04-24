@@ -4,7 +4,8 @@ import Table from "./Components/Table/Table";
 
 interface Context {
 	states: {
-		addTaskModal:boolean
+		addTaskModal:boolean,
+		tasks: string[],
 	};
 	setStates: Function;
 }
@@ -12,6 +13,7 @@ interface Context {
 const StateContext = createContext<Context>({
 	states:{
 		addTaskModal:false,
+		tasks:[]
 	},
 	setStates:()=>{}
 });
@@ -19,6 +21,7 @@ const StateContext = createContext<Context>({
 function App() {
 	const [states, setStates] = useState({
 		addTaskModal:false,
+		tasks:[],
 	});
 
 	return <StateContext.Provider value={{states, setStates}}>
