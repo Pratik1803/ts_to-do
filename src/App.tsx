@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {createContext, useState} from "react";
+import Styles from "./App.module.scss";
+import Table from "./Components/Table/Table";
+
+interface Context {
+	states: {
+		addTaskModal:boolean
+	};
+	setStates: Function;
+}
+
+const StateContext = createContext<Context>({
+	states:{
+		addTaskModal:false,
+	},
+	setStates:()=>{}
+});
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [states, setStates] = useState({
+		addTaskModal:false,
+	});
+
+	return <StateContext.Provider value={{states, setStates}}>
+		<div className={Styles.App}>
+		<h1>Welcome to TypeScript To-DO</h1>
+		<br/>
+		<Table/>
+	</div>
+	</StateContext.Provider>;
 }
 
 export default App;
+export {StateContext};
